@@ -1,4 +1,6 @@
-#!/home/brechied/Documents/python_projects/python_module_05/ex0/lab_env/bin/python
+#!/bin/sh
+'''exec' "/mnt/c/Users/Archaison/Documents/42 Wasaw/python_module_05/ex0/lab_env/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys
