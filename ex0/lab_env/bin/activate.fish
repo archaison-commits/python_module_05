@@ -1,5 +1,5 @@
 # This file must be used with "source <venv>/bin/activate.fish" *from fish*
-# (https://fishshell.com/). You cannot run it directly.
+# (https://fishshell.com/); you cannot run it directly.
 
 function deactivate  -d "Exit virtual environment and return to normal shell environment"
     # reset old environment variables
@@ -33,11 +33,10 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV '/mnt/c/Users/Archaison/Documents/42 Wasaw/python_module_05/ex0/lab_env'
+set -gx VIRTUAL_ENV /home/brechied/Documents/python_projects/python_module_05/lab_env
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
-set -gx VIRTUAL_ENV_PROMPT lab_env
 
 # Unset PYTHONHOME if set.
 if set -q PYTHONHOME
@@ -57,7 +56,7 @@ if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
         set -l old_status $status
 
         # Output the venv prompt; color taken from the blue of the Python logo.
-        printf "%s(%s)%s " (set_color 4B8BBE) lab_env (set_color normal)
+        printf "%s%s%s" (set_color 4B8BBE) '(lab_env) ' (set_color normal)
 
         # Restore the return status of the previous command.
         echo "exit $old_status" | .
@@ -66,4 +65,5 @@ if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
     end
 
     set -gx _OLD_FISH_PROMPT_OVERRIDE "$VIRTUAL_ENV"
+    set -gx VIRTUAL_ENV_PROMPT '(lab_env) '
 end
