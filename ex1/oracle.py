@@ -25,7 +25,7 @@ def variable_checker() -> None:
 
 if __name__ == "__main__":
     print("\nORACLE STATUS: Consulting the configuration\n")
-    from dotenv import load_dotenv  # type: ignore
+    from dotenv import load_dotenv
     load_dotenv()
     matrix_mode: str = os.getenv("MATRIX_MODE", "development")
     database_url: str | None = os.getenv("DATABASE_URL")
@@ -73,4 +73,3 @@ if __name__ == "__main__":
         print(".gitignore does not exist")
     print("[OK] Production overrides available")
     print("\nThe Oracle sees all configurations.")
-

@@ -21,14 +21,16 @@ if __name__ == "__main__":
             print(f"[KO] {i} - Not installed")
             missing_dep.append(i)
         else:
-            print(f"[OK] {module.__name__} ({package_version}){(descriptions[i])}")
+            print(f"[OK] {module.__name__} "
+                  f"({package_version}){(descriptions[i])}")
             # print(package_version)
             # print(module.__name__)
     print("\npip vs Poetry:\n"
-          "  requirements.txt declares what to install; pip resolves"
-          "it at install time.\n  pyproject.toml delcares the same constraints, and "
-          "Poetry pins the resolved\n  versions in poetry.lock so every install is "
-          "identical.")
+          "  requirements.txt declares what to install"
+          "; pip resolves it at install time.\n"
+          "  pyproject.toml delcares the same constraints, and "
+          "Poetry pins the resolved\n  versions in poetry.lock "
+          "so every install is identical.")
     if missing_dep:
         print("\nSome dependencies are missing.\n")
         for missing in missing_dep:
@@ -37,4 +39,3 @@ if __name__ == "__main__":
                   f"poetry: poetry add {missing}\n")
     else:
         print("\nAll reagents present and accounted for.")
-
