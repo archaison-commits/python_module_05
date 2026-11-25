@@ -2,23 +2,30 @@
 
 import os
 
+
 def variable_checker() -> None:
     variables = [
-        "matrix_mode", "database_url", "api_key",
-        "log_level", "zion_endpoint"]
+        "MATRIX_MODE", "DATABASE_URL", "API_KEY",
+        "LOG_LEVEL", "ZION_ENDPOINT"]
+    var_counter: int = 0
     with open(__file__, "r") as file:
         source_code = file.readlines()
-        if variable in variables:
-            for line in source_code[15:20]:
-                if "os.getenv(" in line:
-                    continue
-                else:
-                    print(f"[KO] secrets may be hardcoded")
-    print("[OK] No hardcoded secrets detected")
+        for variable in variables:
+            variable_found: bool = False
+            for line in source_code:
+                if variable in line and "os.getenv(" in line:
+                    variable_found = True
+            if variable_found:
+                var_counter += 1
+    if var_counter == len(variables):
+        print("[OK] No hardcoded secrets detected")
+    else:
+        print("[KO] secrets may be hardcoded")
+
 
 if __name__ == "__main__":
     print("\nORACLE STATUS: Consulting the configuration\n")
-    from dotenv import load_dotenv # type: ignore
+    from dotenv import load_dotenv  # type: ignore
     load_dotenv()
     matrix_mode: str = os.getenv("MATRIX_MODE", "development")
     database_url: str | None = os.getenv("DATABASE_URL")
@@ -36,7 +43,7 @@ if __name__ == "__main__":
             print("API Access: Authenticated")
         else:
             print("Missing API key")
-        if log_level == "DEBUG" :
+        if log_level == "DEBUG":
             print(f"Log level: {log_level}")
         else:
             print("Log level: Not configured")
@@ -49,8 +56,8 @@ if __name__ == "__main__":
         if api_key and zion_endpoint and database_url:
             print("System: Operational.")
         else:
-            print("System: Not operational, missing API Access, remote Endpoint "
-                  "or Database")
+            print("System: Not operational, missing API Access, "
+                  "remote Endpoint or Database")
     else:
         print(f'Mode: "{matrix_mode}" is not a valid mode')
     print("\nConfiguration security check:")
@@ -66,5 +73,3 @@ if __name__ == "__main__":
         print(".gitignore does not exist")
     print("[OK] Production overrides available")
     print("\nThe Oracle sees all configurations.")
-
-
